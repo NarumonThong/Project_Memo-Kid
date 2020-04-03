@@ -1,0 +1,58 @@
+name: app_memokid
+description: A new Flutter application.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^0.1.2
+  shared_preferences:
+  font_awesome_flutter: ^8.5.0
+  rflutter_alert: ^1.0.3
+  smooth_star_rating: ^1.0.3
+  intl: ^0.16.0
+  http: any
+  carousel_pro: ^0.0.1
+  folding_cell: ^0.1.2
+  flutter_swiper: ^1.1.6
+  vector_math: any
+  sqflite:
+  path_provider:
+  flutter_staggered_grid_view:
+  flutter_speed_dial: ^1.2.5
+  image_picker: ^0.4.12
+  url_launcher:
+  youtube_player_flutter: ^6.0.3+2
+  flutter_launcher_icons: ^0.7.4
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/photo.png"
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/emergency/
+    - assets/images/ex/
+    - assets/images/icons/
+    - assets/images/login/
+    - assets/images/media/
+    - assets/images/nutritions/
+    - assets/images/social/
+    - assets/images/fourty/
+    - assets/images/diary/
+    - assets/images/
+
