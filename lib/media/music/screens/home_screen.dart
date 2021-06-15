@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   _channel.title,
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 20.0,
+                    fontSize: 17.0,
                     fontWeight: FontWeight.w600,
                   ),
                   overflow: TextOverflow.ellipsis,
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   '${_channel.subscriberCount} subscribers',
                   style: TextStyle(
                     color: Colors.grey[600],
-                    fontSize: 16.0,
+                    fontSize: 13.0,
                     fontWeight: FontWeight.w600,
                   ),
                   overflow: TextOverflow.ellipsis,
@@ -115,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 video.title,
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 18.0,
+                  fontSize: 13.0,
                 ),
               ),
             ),

@@ -1,7 +1,6 @@
 import 'package:app_memokid/custom_drawer/app_theme.dart';
 import 'package:app_memokid/custom_drawer/drawer_user_controller.dart';
 import 'package:app_memokid/custom_drawer/home_drawer.dart';
-import 'package:app_memokid/diary/diary_page.dart';
 import 'package:app_memokid/diary/menu/note_page.dart';
 import 'package:app_memokid/emergency/emergency_page.dart';
 import 'package:app_memokid/home_page/home_page.dart';

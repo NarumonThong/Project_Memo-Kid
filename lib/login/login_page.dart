@@ -1,9 +1,9 @@
 import 'package:app_memokid/custom_drawer/main_home.dart';
-import 'package:app_memokid/home_page/home_page.dart';
 import 'package:app_memokid/login/register_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,66 +12,53 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool visible = false;
-
+  SharedPreferences sharedPreferences;
   final _usernameCtrl = new TextEditingController();
   final _passwordCtrl = new TextEditingController();
-
+  final _formKey = GlobalKey<FormState>();
   TextEditingController usr = new TextEditingController();
   TextEditingController pwd = new TextEditingController();
 
-  Future userLogin() async {
-    setState(() {
-      visible = true;
-    });
+  _signin() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    if (_formKey.currentState.validate()) {
+      String _username = _usernameCtrl.text.trim();
+      String _password = _passwordCtrl.text;
+      var url = 'http://203.151.85.197/memo-kid/signin.php';
+      var data = {'username': _username, 'passwords': _password};
+      var response = await http.post(url, body: json.encode(data));
+      Map<String, dynamic> message = jsonDecode(response.body);
 
-    // Getting value from Coltroller
-    String _username = _usernameCtrl.text.trim();
-    String _password = _passwordCtrl.text;
+      if(message['status'] == true){
+        setState(() {
+          sharedPreferences.setString('loginFlag', '1');
+        });
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => MyApp()));
 
-    // Server Login api url
-    var url = 'http://203.151.85.197/memo_kid/loginapp/signin.php';
+      }else{
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: Colors.amber[100],
+                title: Text(
+                  'คำเตือน',
+                  style: TextStyle(color: Colors.red),
+                ),
+                content: Text('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง !'),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('ตกลง'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              );
+            });
+      }
 
-    // store all data with param name
-    var data = {'username': _username, 'passwords': _password};
-
-    // starting web api call.
-    var response = await http.post(url, body: json.encode(data));
-
-    Map<String, dynamic> message = jsonDecode(response.body);
-
-    print('${message['status']}');
-
-    //  if the response Message is Matched.
-    if ('${message['status']}' == 'true') {
-      setState(() {
-        visible = false;
-      });
-
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => MyApp()));
-
-      print('login success');
-    } else {
-      setState(() {
-        visible = false;
-      });
-
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Warning'),
-              content: Text('Username or Password Invalid !'),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          });
     }
   }
 
@@ -80,6 +67,7 @@ class _LoginPageState extends State<LoginPage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
+        alignment: Alignment.center,
         children: <Widget>[
           Center(
             child: new Image.asset(
@@ -89,11 +77,15 @@ class _LoginPageState extends State<LoginPage> {
               fit: BoxFit.fill,
             ),
           ),
-          Center(
-            child: SingleChildScrollView(
+          SingleChildScrollView(
+            child: Form(
+              key: _formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+//                  Text('บันทึกของลูก',
+//                  style: TextStyle(fontSize: 30),
+//                  ),
                   Center(
                     child: Image.asset(
                       'assets/images/login/mom_login.png',
@@ -112,24 +104,37 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value.isEmpty || value.length < 5) {
+                          return 'ชื่อผู้ใช้ห้ามต่ำกว่า 5 ตัวอักษร';
+                        }
+                        return null;
+                      },
                       controller: _usernameCtrl,
                       decoration: InputDecoration(
                         icon: Icon(Icons.person),
-                        hintText: 'Username',
-                        labelText: 'Username',
+                        hintText: 'ชื่อผู้ใช้',
+                        labelText: 'ชื่อผู้ใช้',
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value.isEmpty || value.length < 5) {
+                          return 'รหัสผ่านห้ามต่ำกว่า 5 ตัวอักษร';
+                        }
+
+                        return null;
+                      },
                       controller: _passwordCtrl,
                       obscureText: true,
                       decoration: InputDecoration(
                         icon: Icon(Icons.lock_open),
-                        hintText: 'Password',
-                        labelText: 'Password',
+                        hintText: 'รหัสผ่าน',
+                        labelText: 'รหัสผ่าน',
                       ),
                     ),
                   ),
@@ -141,15 +146,12 @@ class _LoginPageState extends State<LoginPage> {
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       child: RaisedButton(
-                        child: Text('Sign In'),
+                        child: Text('เข้าสู่ระบบ'),
                         color: Colors.blue[200],
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.0),
                         ),
-                        onPressed: () {
-                          // todo
-                          userLogin();
-                        },
+                        onPressed: _signin,
                       ),
                     ),
                   ),
@@ -164,13 +166,13 @@ class _LoginPageState extends State<LoginPage> {
                           TextSpan(
                             children: const <TextSpan>[
                               TextSpan(
-                                text: 'Create Account?  ',
+                                text: 'สมัครสมาชิก?  ',
                                 style: TextStyle(
                                   color: Colors.deepOrange,
                                 ),
                               ),
                               TextSpan(
-                                text: 'Click',
+                                text: 'คลิ๊ก',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.deepOrange,
@@ -181,8 +183,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         onTap: () {
-                          //TODO...
-                          debugPrint('create account click');
+                          debugPrint('create Acctound');
                           Navigator.push(
                             context,
                             MaterialPageRoute(

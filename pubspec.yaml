@@ -11,7 +11,6 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^0.1.2
-  shared_preferences:
   font_awesome_flutter: ^8.5.0
   rflutter_alert: ^1.0.3
   smooth_star_rating: ^1.0.3
@@ -26,9 +25,13 @@ dependencies:
   flutter_staggered_grid_view:
   flutter_speed_dial: ^1.2.5
   image_picker: ^0.4.12
-  url_launcher:
   youtube_player_flutter: ^6.0.3+2
   flutter_launcher_icons: ^0.7.4
+  url_launcher: ^5.4.5
+  device_apps: ^1.0.9
+  shared_preferences: ^0.5.7+1
+  simple_animations: ^1.3.4
+  avatar_glow:
 
 
 dev_dependencies:
@@ -54,5 +57,22 @@ flutter:
     - assets/images/social/
     - assets/images/fourty/
     - assets/images/diary/
+    - assets/images/notification/
+    - assets/images/home/
     - assets/images/
+
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+
+  fonts:
+    - family: Sriracha
+      fonts:
+        - asset: assets/fonts/Sriracha-Regular.ttf
+    - family: Pattaya
+      fonts:
+        - asset: assets/fonts/Pattaya-Regular.ttf
 

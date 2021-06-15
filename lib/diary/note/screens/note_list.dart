@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:app_memokid/diary/diary_page.dart';
 import 'package:app_memokid/diary/note/db_helper/db_helper.dart';
 import 'package:app_memokid/diary/note/modal_class/notes.dart';
 import 'package:app_memokid/diary/note/screens/note_detail.dart';
@@ -34,22 +33,6 @@ class NoteListState extends State<NoteList> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Color(0xFFFFE082),
-//        leading: noteList.length == 0
-//            ? Container()
-//            : IconButton(
-//          icon: Icon(
-//            Icons.arrow_back_ios,
-//            color: Colors.black,
-//          ),
-//          onPressed: () {
-//            Navigator.push(
-//                context,
-//                new MaterialPageRoute(
-//                    builder: (BuildContext context) =>
-//                    new DiaryPage(),
-//                ));
-//          },
-//        ),
         actions: <Widget>[
           noteList.length == 0
               ? Container(
@@ -78,7 +61,7 @@ class NoteListState extends State<NoteList> {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Text('Click on the add button to add a new note!',
+            child: Text('คลิกที่ปุ่มเพิ่มเพื่อเพิ่มบันทึก!',
                 style: Theme.of(context).textTheme.body1),
           ),
         ),
@@ -89,7 +72,7 @@ class NoteListState extends State<NoteList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          navigateToDetail(Note('', '', 3, 0), 'Diary Note');
+          // navigateToDetail(Note('', '', 3, 0), 'Diary Note');
 //        Navigator.push(context, MaterialPageRoute(builder: (context) => NoteDetail()),);
         },
         tooltip: 'Diary Note',
@@ -107,7 +90,7 @@ class NoteListState extends State<NoteList> {
       itemCount: count,
       itemBuilder: (BuildContext context, int index) => GestureDetector(
         onTap: () {
-          navigateToDetail(this.noteList[index], 'Edit Note');
+          // navigateToDetail(this.noteList[index], 'Edit Note');
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -207,27 +190,15 @@ class NoteListState extends State<NoteList> {
     }
   }
 
-  // void _delete(BuildContext context, Note note) async {
-  //   int result = await databaseHelper.deleteNote(note.id);
-  //   if (result != 0) {
-  //     _showSnackBar(context, 'Note Deleted Successfully');
+
+  // void navigateToDetail(Note note, String title) async {
+  //   bool result = await Navigator.push(context,
+  //       MaterialPageRoute(builder: (context) => NoteDetail(note, title)));
+  //
+  //   if (result == true) {
   //     updateListView();
   //   }
   // }
-
-  // void _showSnackBar(BuildContext context, String message) {
-  //   final snackBar = SnackBar(content: Text(message));
-  //   Scaffold.of(context).showSnackBar(snackBar);
-  // }
-
-  void navigateToDetail(Note note, String title) async {
-    bool result = await Navigator.push(context,
-        MaterialPageRoute(builder: (context) => NoteDetail(note, title)));
-
-    if (result == true) {
-      updateListView();
-    }
-  }
 
   void updateListView() {
     final Future<Database> dbFuture = databaseHelper.initializeDatabase();

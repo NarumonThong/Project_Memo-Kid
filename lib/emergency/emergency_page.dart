@@ -1,6 +1,5 @@
 import 'package:app_memokid/emergency/emergency_data.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class EmergencyPage extends StatefulWidget {
   @override
@@ -11,13 +10,13 @@ class _EmergencyPageState extends State<EmergencyPage> {
 
   final String phone = 'tel:191';
 
-  _callPhone() async {
-    if (await canLaunch(phone)) {
-      await launch(phone);
-    } else {
-      throw 'Could not Call Phone';
-    }
-  }
+  // _callPhone() async {
+  //   if (await canLaunch(phone)) {
+  //     await launch(phone);
+  //   } else {
+  //     throw 'Could not Call Phone';
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   padding: EdgeInsets.only(bottom: 6.0),
-                  height: MediaQuery.of(context).size.height *0.62,
+                  height: MediaQuery.of(context).size.height *0.67,
                   child: EmergencyData(),
                 ),
               ),

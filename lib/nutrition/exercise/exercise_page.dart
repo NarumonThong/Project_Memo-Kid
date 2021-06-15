@@ -1,4 +1,3 @@
-import 'package:app_memokid/custom_drawer/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -46,7 +45,13 @@ class _ExercisePageState extends State<ExercisePage> {
           ),
 
           Positioned(
-            child: Text("การออกกำลังกาย", style: TextStyle(color: AppTheme.darkerText, fontSize: 27, fontWeight: FontWeight.bold),),
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.star_border, color: Colors.pink[200]),
+                Text("การออกกำลังกาย", style: TextStyle(color: Colors.blue, fontSize: 22, fontWeight: FontWeight.bold),),
+                Icon(Icons.star_border, color: Colors.pink[200]),
+              ],
+            ),
             top: 18,
             left: 20,
           ),
@@ -99,12 +104,13 @@ class _ExercisePageState extends State<ExercisePage> {
 
                   Positioned(
                     child: FloatingActionButton(
+                      onPressed: () {},
                       child: Icon(Icons.arrow_downward, color: Colors.white,),
                       backgroundColor: Colors.pinkAccent[100],
                     ),
                     top: -30,
                     right: 30,
-                  )
+                  ),
                 ],
               );
             },
@@ -120,50 +126,55 @@ class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: new AppBar(
-        backgroundColor: Color(0xFFFFE082),
-        title: new Text(
-          'รายละเอียด',
-          style: TextStyle(
-              color: Colors.black
-          ),
-        ),
+        backgroundColor: Color(0xFFFFE082)
       ),
+      backgroundColor: Color(0xFFFFF9C4),
       body: Padding(
         padding: const EdgeInsets.all(5.0),
         child: new Card(
-          color: Color(0xFFFFF9C4),
+          color: Colors.amber[100],
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              child: new Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 10.0,
+            child: ListView(
+              children: <Widget>[
+                Container(
+                  child: new Column(
+                      children: <Widget>[
+                        Container(
+                          height: 250.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(1.0),
+                            child: new Image.network(data["imageM"]),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: new Text(data["typeM"],style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.teal
+                          ),),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(1.0),
+                          child: new Text('............................................',style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.brown
+                          ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: new Text(data["informationM"],style: TextStyle(
+                              color: Colors.purple
+                          ),),
+                        ),
+                        Image.asset('assets/images/ex/ex.png',height: 110.0,)
+                      ],
                     ),
-                    Container(
-                      height: 250.0,
-                      child: Padding(
-                        padding: const EdgeInsets.all(1.0),
-                        child: new Image.network(data["imageM"]),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: new Text(data["typeM"],style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.indigo
-                      ),),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: new Text(data["informationM"]),
-                    ),
-                  ],
                 ),
+              ],
             ),
           ),
         ),

@@ -1,5 +1,7 @@
 import 'package:app_memokid/custom_drawer/app_theme.dart';
+import 'package:app_memokid/login/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeDrawer extends StatefulWidget {
   const HomeDrawer(
@@ -19,6 +21,7 @@ class HomeDrawer extends StatefulWidget {
 
 class _HomeDrawerState extends State<HomeDrawer> {
   List<DrawerList> drawerList;
+  SharedPreferences sharedPreferences;
   @override
   void initState() {
     setdDrawerListArray();
@@ -29,47 +32,48 @@ class _HomeDrawerState extends State<HomeDrawer> {
     drawerList = <DrawerList>[
       DrawerList(
         index: DrawerIndex.HOME,
-        labelName: 'Home',
+        labelName: 'พัฒนาการ',
         isAssetsImage: true,
         imageName: 'assets/images/icons/a1.jpg',
       ),
       DrawerList(
         index: DrawerIndex.Nutrition,
-        labelName: 'Nutrition',
+        labelName: 'โภชนาการ',
         isAssetsImage: true,
         imageName: 'assets/images/icons/a2.jpg',
       ),
       DrawerList(
         index: DrawerIndex.Emergency,
-        labelName: 'Emergency',
+        labelName: 'เบอร์โทรฉุกเฉิน',
         isAssetsImage: true,
         imageName: 'assets/images/icons/a3.jpg',
       ),
       DrawerList(
         index: DrawerIndex.Media,
-        labelName: 'Media',
+        labelName: 'มีเดีย',
         isAssetsImage: true,
         imageName: 'assets/images/icons/a4.jpg',
       ),
       DrawerList(
         index: DrawerIndex.Diary,
-        labelName: 'Diary',
+        labelName: 'บันทึกความทรงจำ',
         isAssetsImage: true,
         imageName: 'assets/images/icons/a5.jpg',
       ),
-      /*
+
       DrawerList(
         index: DrawerIndex.Social,
-        labelName: 'Social',
+        labelName: 'สังคม',
         isAssetsImage: true,
         imageName: 'assets/images/icons/a6.jpg',
       ),
+
       DrawerList(
         index: DrawerIndex.Notifications,
-        labelName: 'Notifications',
+        labelName: 'เกี่ยวกับเรา',
         isAssetsImage: true,
         imageName: 'assets/images/icons/a7.jpg',
-      ),*/
+      ),
     ];
   }
 
@@ -111,15 +115,15 @@ class _HomeDrawerState extends State<HomeDrawer> {
                               shape: BoxShape.circle,
                               boxShadow: <BoxShadow>[
                                 BoxShadow(
-                                    color: AppTheme.grey.withOpacity(0.6),
+                                    color: AppTheme.grey.withOpacity(0.1),
                                     offset: const Offset(2.0, 4.0),
-                                    blurRadius: 8),
+                                    blurRadius: 12),
                               ],
                             ),
                             child: ClipRRect(
                               borderRadius:
-                              const BorderRadius.all(Radius.circular(60.0)),
-                              child: Image.asset('assets/images/profile.jpg'),
+                              const BorderRadius.all(Radius.circular(200.0)),
+                              child: Image.asset('assets/images/baby.jpg'),
                             ),
                           ),
                         ),
@@ -129,10 +133,10 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   Padding(
                     padding: const EdgeInsets.only(top: 8, left: 4),
                     child: Text(
-                      'Budsakorn Trakudjam',
+                      '..." Welcome Memo-kid "...',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: AppTheme.grey,
+                        color: Colors.pink[300],
                         fontSize: 18,
                       ),
                     ),
@@ -168,7 +172,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 title: Text(
                   'Sign Out',
                   style: TextStyle(
-                    fontFamily: AppTheme.fontName,
+                    fontFamily: 'Sriracha',
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                     color: AppTheme.darkText,
@@ -179,8 +183,17 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   Icons.power_settings_new,
                   color: Colors.red,
                 ),
-                onTap: () {
-                  //Navigator.pushReplacementNamed(context, '/LoginPage');
+                onTap: () async {
+                  sharedPreferences = await SharedPreferences.getInstance();
+                  setState(() {
+                    sharedPreferences.clear();
+                  });
+                  Navigator.pushReplacement(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                          new LoginPage()
+                      ));
                 },
               ),
               SizedBox(
@@ -211,17 +224,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   Container(
                     width: 6.0,
                     height: 46.0,
-                    // decoration: BoxDecoration(
-                    //   color: widget.screenIndex == listData.index
-                    //       ? Colors.blue
-                    //       : Colors.transparent,
-                    //   borderRadius: new BorderRadius.only(
-                    //     topLeft: Radius.circular(0),
-                    //     topRight: Radius.circular(16),
-                    //     bottomLeft: Radius.circular(0),
-                    //     bottomRight: Radius.circular(16),
-                    //   ),
-                    // ),
                   ),
                   const Padding(
                     padding: EdgeInsets.all(6.0),

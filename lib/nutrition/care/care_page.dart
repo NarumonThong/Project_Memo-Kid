@@ -28,11 +28,14 @@ class _CarePageState extends State<CarePage>
             SizedBox(height: 10.0),
             Row(
               children: <Widget>[
+                Icon(Icons.star_border, color: Colors.pink[200]),
                 Text('การดูแลครรภ์',
                     style: TextStyle(
-                        fontFamily: 'Rye',
-                        fontSize: 28.0,
+                        fontFamily: 'Sriracha',
+                        color: Colors.purple,
+                        fontSize: 22.0,
                         fontWeight: FontWeight.bold)),
+                Icon(Icons.star_border, color: Colors.pink[200]),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(height: 40.0,child: Image.asset('assets/images/icons/c1.png'),),

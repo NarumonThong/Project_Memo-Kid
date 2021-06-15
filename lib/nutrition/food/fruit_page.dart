@@ -39,6 +39,7 @@ class _FruitPageState extends State<FruitPage> {
         itemBuilder: (BuildContext context, i) {
           return ListTile(
             title: Card(
+              color: Colors.teal[50],
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -61,6 +62,7 @@ class _FruitPageState extends State<FruitPage> {
                           fontWeight: FontWeight.bold
                       ),),
                     ),
+
                   ],
                 ),
               ),
@@ -86,28 +88,29 @@ class SecondPage extends StatelessWidget {
   Widget build(BuildContext context) => new Scaffold(
       appBar: new AppBar(
         backgroundColor: Color(0xFFFFE082),
-        title: new Text(
-          'รายละเอียด',
-          style: TextStyle(
-              color: Colors.black
-          ),
-        ),
       ),
+      backgroundColor: Color(0xFFFFF9C4),
       body: Padding(
         padding: const EdgeInsets.all(5.0),
         child: new Card(
-          color: Color(0xFFFFF9C4),
+          color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: new Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.all(1.0),
-                  child: new Text('ผลไม้ที่สำคัญ',style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
-                    color: Colors.deepOrange,
-                  ),
+                  padding: const EdgeInsets.only(left: 80.0,),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.lightbulb_outline, color: Colors.pink[200]),
+                      new Text('..ผลไม้ที่สำคัญ..',style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                        color: Colors.deepOrange,
+                      ),
+                      ),
+                      Icon(Icons.lightbulb_outline, color: Colors.pink[200]),
+                    ],
                   ),
                 ),
                 SizedBox(
@@ -118,6 +121,15 @@ class SecondPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(1.0),
                     child: new Image.network(data["photoM"]),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(1.0),
+                  child: new Text('...........................................................',style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.teal
+                  ),
                   ),
                 ),
                 SizedBox(
@@ -133,8 +145,11 @@ class SecondPage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: new Text(data["informationM"]),
+                  child: new Text(data["informationM"],style: TextStyle(
+                      color: Colors.purple[300]
+                  ),),
                 ),
+                Image.asset('assets/images/nutritions/bip.gif',height: 110.0,)
               ],
             ),
           ),

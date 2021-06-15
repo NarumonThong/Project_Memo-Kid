@@ -10,7 +10,7 @@ class MyNutritionPage extends StatefulWidget {
 }
 
 class _MyNutritionPageState extends State<MyNutritionPage>
-    with SingleTickerProviderStateMixin{
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
 
   @override
@@ -35,16 +35,25 @@ class _MyNutritionPageState extends State<MyNutritionPage>
           padding: EdgeInsets.all(16.0),
           children: <Widget>[
             SizedBox(height: 10.0),
-            Text('อาหารและโภชนาการ',
-                style: TextStyle(
-                    fontFamily: 'Rye',
-                    fontSize: 28.0,
-                    fontWeight: FontWeight.bold)),
+
+            Row(
+              children: <Widget>[
+                Icon(Icons.star_border, color: Colors.pink[200]),
+                Text('อาหารและโภชนาการ',
+                    style: TextStyle(
+                        fontFamily: 'Sriracha',
+                        color: Colors.green,
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold)
+                ),
+                Icon(Icons.star_border, color: Colors.pink[200]),
+              ],
+            ),
             SizedBox(height: 15.0),
             TabBar(
                 controller: _tabController,
                 indicatorColor: Colors.transparent,
-                labelColor: Colors.red,
+                labelColor: Colors.indigo,
                 isScrollable: true,
                 labelPadding: EdgeInsets.all(2.0),
                 unselectedLabelColor: Color(0xFFC88D67),
@@ -53,7 +62,7 @@ class _MyNutritionPageState extends State<MyNutritionPage>
                     padding: EdgeInsets.all(5.0),
                     //color: Colors.pink,
                     child: Tab(icon: Container(
-                        height: 40.0,
+                        height: 35.0,
                         child: Image.asset('assets/images/nutritions/on1.png')
                     ),
                       text: "อาหารบำรุงครรภ์",
@@ -63,7 +72,7 @@ class _MyNutritionPageState extends State<MyNutritionPage>
                     padding: EdgeInsets.all(5.0),
                     //color: Colors.pink,
                     child: Tab(icon: Container(
-                      height: 40.0,
+                      height: 36.0,
                         child: Image.asset('assets/images/nutritions/on2.png')
                     ),
                       text: "ผลไม้ที่สำคัญ",
@@ -72,7 +81,7 @@ class _MyNutritionPageState extends State<MyNutritionPage>
                   Container(
                     padding: EdgeInsets.all(5.0),
                     child: Tab(icon: Container(
-                        height: 40.0,
+                        height: 36.0,
                         child: Image.asset('assets/images/nutritions/on3.png')
                     ),
                       text: "สารอาหารที่สำคัญ",
@@ -81,8 +90,8 @@ class _MyNutritionPageState extends State<MyNutritionPage>
                   Container(
                     padding: EdgeInsets.all(5.0),
                     child: Tab(icon: Container(
-                        height: 40.0,
-                        child: Image.asset('assets/images/nutritions/on1.png')
+                        height: 36.0,
+                        child: Image.asset('assets/images/nutritions/on4.png')
                     ),
                       text: "อาหารที่ควรหลีกเลี่ยง",
                     ),

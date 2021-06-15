@@ -2,6 +2,7 @@ import 'package:app_memokid/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -9,6 +10,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  var pickeddate;
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController _firstnameCtrl = TextEditingController();
@@ -17,18 +19,15 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _passwordCtrl = TextEditingController();
   TextEditingController _conpasswordCtrl = TextEditingController();
   TextEditingController _emailCtrl = TextEditingController();
-  TextEditingController _conemailCtrl = TextEditingController();
   TextEditingController _telCtrl = TextEditingController();
-  TextEditingController _birthCtrl = TextEditingController();
 
   bool visible = false;
 
-  Future userSignup() async {
+  userSignup() async {
     setState(() {
       visible = true;
     });
 
-    // get value form
     String _firstname = _firstnameCtrl.text;
     String _lastname = _lastnameCtrl.text;
     String _username = _usernameCtrl.text;
@@ -36,84 +35,82 @@ class _RegisterPageState extends State<RegisterPage> {
     String _conpassword = _conpasswordCtrl.text;
     String _email = _emailCtrl.text;
     String _tel = _telCtrl.text;
-    String _birth = _birthCtrl.text;
     String _pwd;
 
     if (_password == _conpassword) {
       _pwd = _password;
-    }
 
-    // store all data with param name
-    var data = {
-      'firstname': _firstname,
-      'lastname': _lastname,
-      'username': _username,
-      'passwords': _pwd,
-      'email': _email,
-      'tel': _tel,
-      'birth': _birth
-    };
+      // store all data with param name
+      var data = {
+        'firstname': _firstname,
+        'lastname': _lastname,
+        'username': _username,
+        'passwords': _pwd,
+        'email': _email,
+        'tel': _tel,
+      };
 
-    // Server Login api url
-    var url = 'http://203.151.85.197/memo_kid/loginapp/signup.php';
+      // Server Login api url
+      var url = 'http://203.151.85.197/memo-kid/signup.php';
 
-    // starting web api call.
-    var response = await http.post(url, body: json.encode(data));
+      // starting web api call.
+      var response = await http.post(url, body: json.encode(data));
+      Map<String, dynamic> message = jsonDecode(response.body);
 
-    Map<String, dynamic> message = jsonDecode(response.body);
-    //var message = jsonDecode(response.body);
+      //  if the response Message is Matched.
+      if (message['status'] == true) {
+        setState(() {
+          visible = false;
+        });
 
-    print(data);
-    print('${message}');
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => LoginPage()));
 
-    //  if the response Message is Matched.
-    if ('${message['status']}' == 'true') {
-      setState(() {
-        visible = false;
-      });
+        print('login success');
+      } else {
+        setState(() {
+          visible = false;
+        });
 
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Warning'),
-              content: Text('Signin success'),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          });
-
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LoginPage()));
-
-      print('login success');
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text(
+                  'คำเตือน',
+                  style: TextStyle(color: Colors.red),
+                ),
+                content: Text('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง !'),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('ตกลง'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              );
+            });
+      }
     } else {
-      setState(() {
-        visible = false;
-      });
-
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Warning'),
-              content: Text('Username or Email already exists!'),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          });
+      setState(() => visible = false);
+      Alert(
+        context: context,
+        type: AlertType.warning,
+        title: "รหัสผ่านไม่ตรงกัน",
+        desc: "",
+        buttons: [
+          DialogButton(
+            child: Text(
+              "ตกลง",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () => Navigator.pop(context),
+            color: Color.fromRGBO(0, 179, 134, 1.0),
+            radius: BorderRadius.circular(0.0),
+          ),
+        ],
+      ).show();
     }
   }
 
@@ -121,8 +118,8 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Account'),
-        centerTitle: true,
+//        title: Text('สมัครสมาชิก'),
+//        centerTitle: true,
         backgroundColor: Colors.amberAccent[100],
       ),
       backgroundColor: Colors.yellow[100],
@@ -145,8 +142,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           controller: _firstnameCtrl,
                           decoration: InputDecoration(
                               prefixIcon: Icon(Icons.person),
-                              labelText: 'Firstname',
-                              hintText: 'Firstname',
+                              labelText: 'ชื่อ',
+                              hintText: 'ชื่อ',
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(14.0),
                               )),
@@ -161,8 +158,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           controller: _lastnameCtrl,
                           decoration: InputDecoration(
                               prefixIcon: Icon(Icons.person),
-                              labelText: 'Lastname',
-                              hintText: 'Lastname',
+                              labelText: 'นามสกุล',
+                              hintText: 'นามสกุล',
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(14.0),
                               )),
@@ -174,11 +171,17 @@ class _RegisterPageState extends State<RegisterPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
+                          validator: (value) {
+                            if (value.isEmpty || value.length < 5) {
+                              return 'ชื่อผู้ใช้ห้ามต่ำกว่า 5 ตัวอักษร';
+                            }
+                            return null;
+                          },
                           controller: _usernameCtrl,
                           decoration: InputDecoration(
                               prefixIcon: Icon(Icons.person),
-                              labelText: 'Username',
-                              hintText: 'Username',
+                              labelText: 'ชื่อผู้ใช้',
+                              hintText: 'ชื่อผู้ใช้',
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(14.0),
                               )),
@@ -190,12 +193,18 @@ class _RegisterPageState extends State<RegisterPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
+                          validator: (value) {
+                            if (value.isEmpty || value.length < 5) {
+                              return 'รหัสผ่านห้ามต่ำกว่า 5 ตัวอักษร';
+                            }
+                            return null;
+                          },
                           obscureText: true,
                           controller: _passwordCtrl,
                           decoration: InputDecoration(
                               prefixIcon: Icon(Icons.lock),
-                              labelText: 'Password',
-                              hintText: 'Password',
+                              labelText: 'รหัสผ่าน',
+                              hintText: 'รหัสผ่าน',
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(14.0),
                               )),
@@ -207,12 +216,18 @@ class _RegisterPageState extends State<RegisterPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
+                          validator: (value) {
+                            if (value.isEmpty || value.length < 5) {
+                              return 'รหัสผ่านห้ามต่ำกว่า 5 ตัวอักษร';
+                            }
+                            return null;
+                          },
                           obscureText: true,
                           controller: _conpasswordCtrl,
                           decoration: InputDecoration(
                               prefixIcon: Icon(Icons.lock),
-                              labelText: 'Confirm Password',
-                              hintText: 'Confirm Password',
+                              labelText: 'ยืนยันรหัสผ่าน',
+                              hintText: 'ยืนยันรหัสผ่าน',
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(14.0),
                               )),
@@ -240,29 +255,19 @@ class _RegisterPageState extends State<RegisterPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
+                          validator: (value) {
+                            if (value.isEmpty || value.length < 10) {
+                              return 'หมายเลขโทรศัพท์ห้ามต่ำกว่า 10 ตัวอักษร';
+                            }
+                            return null;
+                          },
                           keyboardType: TextInputType.phone,
                           maxLength: 10,
                           controller: _telCtrl,
                           decoration: InputDecoration(
                               prefixIcon: Icon(Icons.phone),
-                              labelText: 'Tel',
-                              hintText: 'Tel',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(14.0),
-                              )),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: TextFormField(
-                          controller: _birthCtrl,
-                          decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.card_giftcard),
-                              labelText: 'Birth Day',
-                              hintText: 'Birth Day',
+                              labelText: 'มือถือ',
+                              hintText: 'มือถือ',
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(14.0),
                               )),
@@ -277,20 +282,53 @@ class _RegisterPageState extends State<RegisterPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          color: Colors.teal[100],
+                          color: Colors.blue[300],
                           onPressed: () {
-                            // todo
-                            print('signup');
-                            userSignup();
+                            if (_formKey.currentState.validate()) {
+                              userSignup();
+                            }
                           },
                           child: Container(
-                            height: 50,
+                            height: 40,
                             width: MediaQuery.of(context).size.width,
                             child: Center(
                               child: Text(
-                                'Create',
+                                'สมัครสมาชิก',
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          color: Colors.red[300],
+                          onPressed: () {
+                            // todo
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()),
+                            );
+                          },
+                          child: Container(
+                            height: 40,
+                            width: MediaQuery.of(context).size.width,
+                            child: Center(
+                              child: Text(
+                                'ยกเลิก',
+                                style: TextStyle(
+                                  color: Colors.black,
                                   fontSize: 18,
                                 ),
                               ),

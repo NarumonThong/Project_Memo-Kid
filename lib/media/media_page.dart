@@ -20,7 +20,7 @@ class _MediaPageState extends State<MediaPage> {
     "การอ่านนิทานหรือฟังนิทานช่วยเสริมสร้างพัฒนาการที่ดีให้แก่ลูกในครรภ์ไม่ว่าจะเป็นด้านสมองและด้านร่างกาย จะได้รับการพัฒนาที่ดีจากการอฟังนิทาน และได้รับความรักผ่านเส้นเสียงและความรู้สึกของคุณแม่",
   ];
   final List<Color> colors = [
-    Colors.amber[100],
+    Colors.yellowAccent[700],
     Colors.lightGreen[200],
   ];
   @override

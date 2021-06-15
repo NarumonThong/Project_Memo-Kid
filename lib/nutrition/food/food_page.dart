@@ -38,10 +38,14 @@ class _FoodPageState extends State<FoodPage> {
         itemBuilder: (BuildContext context, i) {
           return ListTile(
             title: Card(
+              color: Colors.red[50],
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: <Widget>[
+                    SizedBox(
+                      height: 8.0,
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(1.0),
                       child: new Image.network(data[i]["imageM"]),
@@ -84,27 +88,13 @@ class SecondPage extends StatelessWidget {
       appBar: new AppBar(
         elevation: 0.0,
         centerTitle: true,
-//        leading: IconButton(
-//          icon: Icon(Icons.arrow_back, color: Color(0xFF545D68)),
-//          onPressed: () {
-//            Navigator.push(
-//              context,
-//              MaterialPageRoute(builder: (context) => HomePage()),
-//            );
-//          },
-//        ),
         backgroundColor: Color(0xFFFFE082),
-        title: new Text(
-          'รายละเอียด',
-          style: TextStyle(
-              color: Colors.black
-          ),
-        ),
       ),
+      backgroundColor: Color(0xFFFFF9C4),
       body: Padding(
-        padding: const EdgeInsets.all(2.0),
+        padding: const EdgeInsets.all(8.0),
         child: Card(
-          color: Color(0xFFFFF9C4),
+          color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView(
@@ -112,12 +102,18 @@ class SecondPage extends StatelessWidget {
                 new Column(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      child: new Text('อาหารบำรุงครรภ์',style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14.0,
-                        color: Colors.deepOrange,
-                      ),
+                      padding: const EdgeInsets.only(left: 60.0),
+                      child: Row(
+                        children: <Widget>[
+                          Icon(Icons.lightbulb_outline, color: Colors.pink[200]),
+                          new Text('..อาหารบำรุงครรภ์..',style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                            color: Colors.deepOrange,
+                          ),
+                          ),
+                          Icon(Icons.lightbulb_outline, color: Colors.pink[200]),
+                        ],
                       ),
                     ),
                     SizedBox(
@@ -134,17 +130,30 @@ class SecondPage extends StatelessWidget {
                       height: 10.0,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(1.0),
                       child: new Text(data["weekM"],style: TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                           color: Colors.indigo
-                      ),),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(1.0),
+                      child: new Text('............................................',style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.teal
+                      ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: new Text(data["informationM"]),
+                      child: new Text(data["informationM"],style: TextStyle(
+                        color: Colors.purple[300]
+                      ),),
                     ),
+                    Image.asset('assets/images/nutritions/big.gif',height: 110.0,)
                   ],
                 ),
               ],

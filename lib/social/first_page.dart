@@ -76,49 +76,7 @@ class _FirstPageState extends State<FirstPage> {
   }
 }
 
-Widget appBars({height_appbar, userImage, userName}) {
-  return Container(
-    height: height_appbar,
-    color: Color(0xFFFFE082),
-    child: Padding(
-      padding: const EdgeInsets.only(
-        top: 30,
-        left: 20,
-      ),
-      child: Row(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(top: 30.0, left: 20.0),
-            width: 50.0,
-            height: 50.0,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.white,
-              ),
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: NetworkImage(
-                  userImage,
-                ),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          Text(
-            userName,
-            style: TextStyle(
-              fontSize: 24.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
+
 
 Widget friendTitle (){
   return Padding(

@@ -55,19 +55,19 @@ class _MyNutritiomPageState extends State<MyNutritiomPage> {
                                 MaterialPageRoute(builder: (context) => MyNutritionPage()),
                               );
                             },
-                            leading: Icon(Icons.add_circle),
+//                            leading: Icon(Icons.fastfood,color: Colors.teal,size: 35.0,),
                             title: Text(
                               'อาหารและโภชนาการ',
                               style: TextStyle(
-                                  fontSize:18.0,
+                                  color: Colors.purple,
+                                  fontSize:22.0,
                                   fontWeight: FontWeight.bold
                               ),
                             ),
-                            trailing: Icon(Icons.keyboard_arrow_right),
+                            trailing: Icon(Icons.keyboard_arrow_right,size: 30.0,color: Colors.blue),
                           ),
                         ),
                       ),
-
                       Padding(
                         padding: const EdgeInsets.all(6.0),
                         child: Container(
@@ -80,15 +80,16 @@ class _MyNutritiomPageState extends State<MyNutritiomPage> {
                                 MaterialPageRoute(builder: (context) => ExercisePage()),
                               );
                             },
-                            leading: Icon(Icons.add_circle),
+//                            leading: Icon(Icons.accessibility,color: Colors.deepOrange,size: 35.0),
                             title: Text(
                               'การออกกำลังกาย',
                               style: TextStyle(
-                                  fontSize:18.0,
+                                  color: Colors.green,
+                                  fontSize:22.0,
                                   fontWeight: FontWeight.bold
                               ),
                             ),
-                            trailing: Icon(Icons.keyboard_arrow_right),
+                            trailing: Icon(Icons.keyboard_arrow_right,size: 30.0,color: Colors.blue),
                           ),
                         ),
                       ),
@@ -104,24 +105,27 @@ class _MyNutritiomPageState extends State<MyNutritiomPage> {
                                 MaterialPageRoute(builder: (context) => CarePage()),
                               );
                             },
-                            leading: Icon(Icons.add_circle),
+//                            leading: Icon(Icons.face,color: Colors.purple,size: 35.0),
                             title: Text(
                               'การดูแลครรภ์',
                               style: TextStyle(
-                                  fontSize:18.0,
+                                  color: Colors.brown,
+                                  fontSize:22.0,
                                   fontWeight: FontWeight.bold
                               ),
                             ),
-                            trailing: Icon(Icons.keyboard_arrow_right),
+                            trailing: Icon(Icons.keyboard_arrow_right,size: 30.0,color: Colors.blue),
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
+
               ),
             ],
-          )
+          ),
+          Image.asset('assets/images/nutritions/bb.png',height: 110.0,)
         ],
       ),
     );

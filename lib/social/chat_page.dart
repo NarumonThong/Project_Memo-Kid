@@ -90,27 +90,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 }
 
-Widget appBars({h_nav, title}) {
-  return Container(
-    height: h_nav,
-    color: Color(0xFFFFE082),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(left: 20.0, top: 20.0),
-          child: Text(
-            'แชท',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 22.0,
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
+
 
 Widget chatList({
   userImage,

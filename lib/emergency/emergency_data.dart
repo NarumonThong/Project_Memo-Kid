@@ -1,5 +1,4 @@
 import 'package:app_memokid/custom_drawer/app_theme.dart';
-import 'package:app_memokid/emergency/callphone_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -163,11 +162,14 @@ class _EmergencyDataState extends State<EmergencyData> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("หมายเลยโทรศัพท์ฉุกเฉิน",style: TextStyle(
-          fontSize: 20.0,
-          fontWeight: FontWeight.bold,
-          color: AppTheme.darkerText
-        ),),
+        title: Padding(
+          padding: const EdgeInsets.only(left: 65.0),
+          child: Text("หมายเลยโทรศัพท์ฉุกเฉิน",style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            color: AppTheme.darkerText
+          ),),
+        ),
         backgroundColor: Colors.green[400],
       ),
       body: new ListView.builder(

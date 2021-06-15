@@ -79,20 +79,15 @@ class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: new AppBar(
-        backgroundColor: Color(0xFFFFE082),
-        title: new Text(
-          'รายละเอียด',
-          style: TextStyle(
-              color: Colors.black
-          ),
-        ),
+        backgroundColor: Color(0xFFFFE082)
       ),
+      backgroundColor: Color(0xFFFFF9C4),
       body: Padding(
         padding: const EdgeInsets.all(5.0),
         child: ListView(
           children: <Widget>[
             new Card(
-              color: Color(0xFFFFF9C4),
+              color: Colors.amber[100],
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
@@ -120,6 +115,7 @@ class SecondPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 6.0, right: 6.0),
                         child: new Text(data["informationM"],style: TextStyle(
                           fontSize: 12.0,
+                            color: Colors.purple
                         ),),
                       ),
                       Padding(
@@ -135,6 +131,7 @@ class SecondPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 6.0, right: 6.0),
                         child: new Text(data["information2M"],style: TextStyle(
                           fontSize: 12.0,
+                            color: Colors.brown
                         ),),
                       ),
                       Container(
@@ -157,6 +154,7 @@ class SecondPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 6.0, right: 6.0),
                         child: new Text(data["information3M"],style: TextStyle(
                           fontSize: 12.0,
+                            color: Colors.brown
                         ),),
                       ),
                     ],

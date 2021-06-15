@@ -40,6 +40,7 @@ class _AvoidPageState extends State<AvoidPage> {
         itemBuilder: (BuildContext context, i) {
           return ListTile(
             title: Card(
+              color: Colors.deepOrange[100],
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -51,9 +52,7 @@ class _AvoidPageState extends State<AvoidPage> {
                         child: new Image.network(data[i]["imageM"]),
                       ),
                     ),
-                    SizedBox(
-                      height: 8.0,
-                    ),
+
                     Padding(
                       padding: const EdgeInsets.all(1.0),
                       child: new Text(data[i]["typeM"],style: TextStyle(
@@ -87,17 +86,12 @@ class SecondPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
       appBar: new AppBar(
         backgroundColor: Color(0xFFFFE082),
-        title: new Text(
-          'รายละเอียด',
-          style: TextStyle(
-              color: Colors.black
-          ),
-        ),
       ),
+      backgroundColor: Color(0xFFFFF9C4),
       body: Padding(
         padding: const EdgeInsets.all(5.0),
         child: new Card(
-          color: Color(0xFFFFF9C4),
+          color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView(
@@ -105,12 +99,18 @@ class SecondPage extends StatelessWidget {
                 new Column(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      child: new Text('อาหารที่ควรหลีกเลี่ยง',style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
-                        color: Colors.deepOrange,
-                      ),
+                      padding: const EdgeInsets.only(left: 70.0),
+                      child: Row(
+                        children: <Widget>[
+                          Icon(Icons.lightbulb_outline, color: Colors.pink[200]),
+                          new Text('อาหารที่ควรหลีกเลี่ยง',style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                            color: Colors.deepOrange,
+                          ),
+                          ),
+                          Icon(Icons.lightbulb_outline, color: Colors.pink[200]),
+                        ],
                       ),
                     ),
                     SizedBox(
@@ -127,7 +127,7 @@ class SecondPage extends StatelessWidget {
                       height: 10.0,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(1.0),
                       child: new Text(data["typeM"],style: TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
@@ -135,9 +135,21 @@ class SecondPage extends StatelessWidget {
                       ),),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: new Text(data["informationM"]),
+                      padding: const EdgeInsets.all(1.0),
+                      child: new Text('............................................',style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.teal
+                      ),
+                      ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: new Text(data["informationM"],style: TextStyle(
+                          color: Colors.purple[300]
+                      ),),
+                    ),
+                    Image.asset('assets/images/nutritions/bit.gif',height: 110.0,)
                   ],
                 ),
               ],
